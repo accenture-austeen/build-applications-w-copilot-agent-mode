@@ -17,7 +17,7 @@ function renderValue(value) {
   return value ?? 'Not set'
 }
 
-export function ResourcePage({ title, description, endpoint, responseKey, columns }) {
+export function ResourcePage({ title, description, endpoint, responseKey, columns, loadItems }) {
   const [items, setItems] = useState([])
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState('')
@@ -25,9 +25,11 @@ export function ResourcePage({ title, description, endpoint, responseKey, column
   useEffect(() => {
     let ignore = false
 
-    async function loadItems() {
+    async function loadPageItems() {
       try {
-        const nextItems = await fetchCollection(endpoint, responseKey)
+        const nextItems = loadItems
+          ? await loadItems()
+          : await fetchCollection(endpoint, responseKey)
 
         if (!ignore) {
           setItems(nextItems)
@@ -41,7 +43,7 @@ export function ResourcePage({ title, description, endpoint, responseKey, column
       }
     }
 
-    loadItems()
+    loadPageItems()
 
     return () => {
       ignore = true
