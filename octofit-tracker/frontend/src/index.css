@@ -1,0 +1,17 @@
+:root {
+  font: 16px/1.5 Georgia, 'Times New Roman', serif;
+  color: #20332d;
+  background: #f7f3e8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
